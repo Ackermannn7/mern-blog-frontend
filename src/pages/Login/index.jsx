@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import styles from "./Login.module.scss";
-import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
+import { fetchLogin, selectIsAuth } from "../../redux/slices/auth";
 
 export const Login = () => {
   const isAuth = useSelector(selectIsAuth);
@@ -26,9 +26,18 @@ export const Login = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (values) => {
-    dispatch(fetchAuth(values));
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchLogin(values));
+    if (!data.payload) {
+      return alert("Couldn't login");
+    }
+    if ("token" in data.payload) {
+      window.localStorage.setItem("token", data.payload.token);
+    }
   };
+
+  React.useEffect(() => {}, []);
+
   if (isAuth) {
     return <Navigate to="/" />;
   }
