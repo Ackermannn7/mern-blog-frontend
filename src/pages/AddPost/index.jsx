@@ -8,7 +8,7 @@ import "easymde/dist/easymde.min.css";
 import styles from "./AddPost.module.scss";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/auth";
-import { useNavigate, Navigate, useParams } from "react-router-dom";
+import { useNavigate, Navigate, useParams, Link } from "react-router-dom";
 import axios from "../../axios";
 
 export const AddPost = () => {
@@ -69,6 +69,23 @@ export const AddPost = () => {
       alert("Ошибка при создании статьи!");
     }
   };
+
+  React.useEffect(() => {
+    if (id) {
+      axios
+        .get(`/posts/${id}`)
+        .then(({ data }) => {
+          setTitle(data.title);
+          setText(data.text);
+          setImageUrl(data.imageUrl);
+          setTags(data.tags.join(", "));
+        })
+        .catch((err) => {
+          console.warn(err);
+          alert("Error getting posts");
+        });
+    }
+  });
 
   const options = React.useMemo(
     () => ({
@@ -146,13 +163,11 @@ export const AddPost = () => {
       />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} size="large" variant="contained">
-          Опубликовать
+          {isEditing ? "Save" : "Publish"}
         </Button>
-        <a href="/">
-          <Button onClick={() => <Navigate to="/" />} size="large">
-            Отмена
-          </Button>
-        </a>
+        <Link to="/">
+          <Button size="large">Cancel</Button>
+        </Link>
       </div>
     </Paper>
   );
