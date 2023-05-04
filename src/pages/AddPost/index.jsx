@@ -66,7 +66,7 @@ export const AddPost = () => {
       navigate(`/posts/${_id}`);
     } catch (err) {
       console.warn(err);
-      alert("Ошибка при создании статьи!");
+      alert("Error creating an article!");
     }
   };
 
@@ -92,7 +92,7 @@ export const AddPost = () => {
       spellChecker: false,
       maxHeight: "400px",
       autofocus: true,
-      placeholder: "Введите текст...",
+      placeholder: "Enter text...",
       status: false,
       autosave: {
         enabled: true,
@@ -113,7 +113,7 @@ export const AddPost = () => {
         variant="outlined"
         size="large"
       >
-        Загрузить превью
+        Upload preview
       </Button>
       <input
         ref={inputFileRef}
@@ -128,7 +128,7 @@ export const AddPost = () => {
             color="error"
             onClick={onClickRemoveImage}
           >
-            Удалить
+            Remove
           </Button>
           <img
             className={styles.image}
@@ -142,7 +142,7 @@ export const AddPost = () => {
       <TextField
         classes={{ root: styles.title }}
         variant="standard"
-        placeholder="Заголовок статьи..."
+        placeholder="Title..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
@@ -150,7 +150,7 @@ export const AddPost = () => {
       <TextField
         classes={{ root: styles.tags }}
         variant="standard"
-        placeholder="Тэги"
+        placeholder="Tags..."
         value={tags}
         onChange={(e) => setTags(e.target.value)}
         fullWidth

@@ -21,9 +21,9 @@ export const Registration = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      fullName: "Sofya Rogunovich",
-      email: "sofya@test.com",
-      password: "12345678",
+      fullName: "",
+      email: "",
+      password: "",
     },
     mode: "onChange",
   });
@@ -43,7 +43,7 @@ export const Registration = () => {
   return (
     <Paper classes={{ root: styles.root }}>
       <Typography classes={{ root: styles.title }} variant="h5">
-        Создание аккаунта
+        Registration
       </Typography>
       <div className={styles.avatar}>
         <Avatar sx={{ width: 100, height: 100 }} />
@@ -82,7 +82,7 @@ export const Registration = () => {
           variant="contained"
           fullWidth
         >
-          Зарегистрироваться
+          Sign Up
         </Button>
       </form>
     </Paper>
